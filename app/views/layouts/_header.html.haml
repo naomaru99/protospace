@@ -7,12 +7,15 @@
     %a.navbar-brand(href="/")
       = image_tag("logo.png", :alt => "PROTO TYPE - SHARE THE PROTOTYPE", :height => "36px")
     .navbar-collapse.collapse.navbar-responsive-collapse
-      //not login 
+      //not login
       %ul.nav.navbar-nav.navbar-right
         %li
           .btn.btn-primary.navbar-btn
-            %a{:href => "/login"}
-              Get Started
+            = link_to "Get Started", "/users/sign_up"
+        %li
+          .btn.btn-primary.navbar-btn
+            = link_to "Sign Out", "users/sign_out", method: :delete
+
       //login
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
@@ -28,4 +31,3 @@
           .btn.btn-primary.navbar-btn
             %a{:href => "/proto/new"}
               New Proto
-              
