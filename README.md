@@ -8,17 +8,17 @@
 
 > has_many proto_comments
 
-- name
+- username
 
 - email
 
 - password
 
-- member_of
+- group
 
 - profile
 
-- works
+- work
 
 - avatar
 
