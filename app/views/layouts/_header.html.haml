@@ -11,11 +11,14 @@
       %ul.nav.navbar-nav.navbar-right
         %li
           .btn.btn-primary.navbar-btn
-            = link_to "Get Started", "/users/sign_up"
-        %li
-          .btn.btn-primary.navbar-btn
-            = link_to "Sign Out", "users/sign_out", method: :delete
-
+            = link_to "Get Started", "/users/sign_in"
+        - if current_user
+          %li
+            .btn.btn-primary.navbar-btn
+              = link_to "Sign Out", "users/sign_out", method: :delete
+          %li
+            .btn.btn-primary.navbar-btn
+              = current_user.username
       //login
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
