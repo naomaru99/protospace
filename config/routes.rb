@@ -7,13 +7,10 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'top#index'
 
-  get  '/top'               =>    'top#index'
-  get  '/proto'             =>    'proto#index'
-  get  '/proto/new'         =>    'proto#new'
-  get  '/user'              =>    'user#index'
-  get  '/user/new'          =>    'user#new'
-  get  '/user/edit'         =>    'user#edit'
-  get  '/login'             =>    'login#index'
+  resources :user, only: [:index, :new, :edit, :update]
+  resources :login, only: :index
+  resources :top, only: :index
+  resources :proto, only: [:index, :new]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
