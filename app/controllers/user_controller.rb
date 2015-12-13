@@ -5,4 +5,13 @@ class UserController < ApplicationController
   end
   def edit
   end
+  def update
+    current_user.update(update_params)
+    redirect_to :root
+  end
+
+  private
+  def update_params
+    params.require(:user).permit(:username, :group, :profile, :work)
+  end
 end
