@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'top#index'
 
-  resources :user, only: [:index, :new, :edit, :update]
+  resources :user, only: [:index, :show, :new, :edit, :update]
   resources :login, only: :index
   resources :top, only: :index
   resources :proto, only: [:index, :new]
