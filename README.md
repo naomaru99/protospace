@@ -34,6 +34,8 @@
 
 - user_id
 
+- title
+
 - catchcopy
 
 - concept
@@ -62,8 +64,4 @@
 
 - prototype_id
 
-- web_design
-
-- ui
-
-- application
+- name
