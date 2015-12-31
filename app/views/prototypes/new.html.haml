@@ -1,4 +1,4 @@
-= form_for @prototype, html: {class: "container proto-new" } do |f|
+= form_for @prototype, html: { class: "container proto-new" } do |f|
   .col-md-8.col-md-offset-2
     %header.row.user-nav.row
       .col-md-12
@@ -8,16 +8,15 @@
         .cover-image-upload
           = f.fields_for :thumbnails do |t|
             = t.file_field :image
+            = t.hidden_field :property, value: "main"
       .col-md-12
         %ul.proto-sub-list.list-group
-          %li.list-group-item.col-md-4
-            .image-upload
-              = f.fields_for :thumbnails do |t|
-                = t.file_field :image
-          %li.list-group-item.col-md-4
-            .image-upload
-              = f.fields_for :thumbnails do |t|
-                = t.file_field :image
+          - 2.times do
+            %li.list-group-item.col-md-4
+              .image-upload
+                = f.fields_for :thumbnails do |t|
+                  = t.file_field :image
+                  = t.hidden_field :property, value: "sub"
           %li.list-group-item.col-md-4
             .image-upload-plus
               %span +
