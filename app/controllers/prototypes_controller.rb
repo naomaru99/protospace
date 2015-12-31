@@ -3,7 +3,7 @@ class PrototypesController < ApplicationController
   end
   def new
     @prototype = Prototype.new
-    3.times { @prototype.thumbnails.build }
+    @prototype.thumbnails.build
   end
 
   def show
@@ -17,7 +17,7 @@ class PrototypesController < ApplicationController
 
   def edit
     @prototype = Prototype.find(params[:id])
-    3.times {@prototype.thumbnails.build }
+    @prototype.thumbnails.build
   end
 
   def update
@@ -27,6 +27,6 @@ class PrototypesController < ApplicationController
 
   private
   def create_params
-    params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image]).merge(user_id: current_user.id)
+    params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image, :property]).merge(user_id: current_user.id)
   end
 end
