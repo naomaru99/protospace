@@ -1,0 +1,40 @@
+= form_for @prototype, html: { class: "container proto-new" } do |f|
+  .col-md-8.col-md-offset-2
+    %header.row.user-nav.row
+      .col-md-12
+        = f.text_field :title, placeholder: "Title", class: "proto-new-title"
+    .row
+      .col-md-12
+        .cover-image-upload
+          = f.fields_for :thumbnails, @prototype.thumbnails.main do |t|
+            = t.file_field :image
+            %img#main_preview{ src: @prototype.thumbnails.main.first!.image}
+            = t.hidden_field :property, value: "main"
+      .col-md-12
+        %ul.proto-sub-list.list-group
+          - f.object.thumbnails.sub.each_with_index do |sub, i|
+            %li.list-group-item.col-md-4.sub_image_form.appear_form
+              .image-upload{ id: "image_#{i}_uploader" }
+                = f.fields_for :thumbnails, sub do |t|
+                  = t.file_field :image
+                  %img.sub_image{ id: "sub_#{i}_preview", src: t.object.image }
+                  = t.hidden_field :property, value: "sub"
+          %li.list-group-item.col-md-4
+            .image-upload-plus
+              %span +
+    .row.proto-description
+      .col-md-12
+        = f.text_field :catchcopy, placeholder: "Catch Copy"
+      .col-md-12
+        = f.text_area :concept, placeholder: "Concept", cols: "30", rows: "4"
+      .col-md-12
+        %h4 Tag List
+        .row
+          .col-md-3
+            = f.text_field :tag1, placeholder: "Web Design"
+          .col-md-3
+            = f.text_field :tag2, placeholder: "UI"
+          .col-md-3
+            = f.text_field :tag3, placeholder: "Application"
+    .row.text-center.proto-btn
+      = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"

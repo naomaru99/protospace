@@ -4,7 +4,7 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @prototypes = Prototype.where(user_id: current_user.id).page(params[:page])
+    @prototypes = @user.prototypes.order(created_at: :desc).page(params[:page])
   end
 
   def new
