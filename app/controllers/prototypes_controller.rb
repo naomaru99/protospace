@@ -1,4 +1,6 @@
 class PrototypesController < ApplicationController
+  before_action :get_prototype, only: [:edit, :update, :destroy]
+
   def index
   end
   def new
@@ -16,18 +18,26 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @prototype = Prototype.find(params[:id])
     @prototype.thumbnails.build
   end
 
   def update
-    @prototype = Prototype.find(params[:id])
     @prototype.update(update_params)
+    redirect_to :root
+  end
+
+  def destroy
+    @prototype.destroy
     redirect_to :root
   end
 
 
   private
+
+  def get_prototype
+    @prototype = Prototype.find(params[:id])
+  end
+
   def create_params
     params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image, :property]).merge(user_id: current_user.id)
   end
