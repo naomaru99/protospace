@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :get_prototype, only: [:edit, :update, :destroy]
+  before_action :get_prototype, only: [:show, :edit, :update, :destroy]
 
   def index
   end
@@ -9,6 +9,8 @@ class PrototypesController < ApplicationController
   end
 
   def show
+    @comments = @prototype.comments
+    @comment = Comment.new
   end
 
   def create
