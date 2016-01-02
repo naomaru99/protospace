@@ -1,0 +1,49 @@
+.container.proto-page
+  %header.row.user-nav
+    .col-md-6
+      .media
+        .media-left
+          = link_to image_tag(@prototype.user.avatar, { :alt => "64x64", "data-holder-rendered" => "true", "data-src" => "holder.js/64x64",:style => "width: 64px; height: 64px;", class: "media-object"}), user_path(@prototype.user.id)
+        .media-body
+          %h4#top-aligned-media.media-heading
+            = @prototype.title
+          .proto-user
+            = link_to "by #{@prototype.user.username}", user_path(@prototype.user.id)
+            //リンクは後で(userのshowページをつくってから)
+            %span.degree= "#{@prototype.user.group} #{@prototype.user.work}"
+
+  .row
+    .col-md-9
+      = image_tag(@prototype.thumbnails.main.first!.image, :class => 'img-responsive')
+    .col-md-3
+      %ul.proto-sub-list.list-group
+        - @prototype.thumbnails.sub.each do |sub|
+          %li.list-group-item
+            = image_tag(sub.image, :class => 'img-responsive')
+  .row.proto-description
+    .col-md-3
+      %h4 Catch Copy
+      %p= @prototype.catchcopy
+    .col-md-6
+      %h4 Concept
+      %p= @prototype.concept
+    .col-md-3
+      %h4 Tag List
+      %ul.proto-tag-list.list-inline
+
+  .row.proto-comments
+    %h4.col-md-12
+      Comments
+      %span.num= "(#{@comments.count})"
+    .col-md-8#comment_area
+      #comment_list
+        = render partial: "comment", collection: @comments
+      - if user_signed_in?
+        = form_for @comment, html: { class: 'form-inline'},  url: prototype_comments_path(@prototype), remote: true do |f|
+          %h4 Write a comment
+          .row
+            .form-group.col-md-10
+              = f.text_area :text, placeholder: "Your comments", rows: "3", class: "textform-control"
+              = f.hidden_field :prototype_id, value: @prototype.id
+            .form-group.col-md-2
+              = f.submit "Comment", class: "btn btn-primary"
