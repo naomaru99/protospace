@@ -14,12 +14,12 @@
 
   .row
     .col-md-9
-      = image_tag(@prototype.thumbnails.main.first!.image, :class => 'img-responsive')
+      = image_tag(@prototype.thumbnails.main.first!.image, class: 'img-responsive')
     .col-md-3
       %ul.proto-sub-list.list-group
         - @prototype.thumbnails.sub.each do |sub|
           %li.list-group-item
-            = image_tag(sub.image, :class => 'img-responsive')
+            = image_tag(sub.image, class: 'img-responsive')
   .row.proto-description
     .col-md-3
       %h4 Catch Copy
