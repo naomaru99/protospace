@@ -19,18 +19,6 @@
         .proto-posted
           = prototype.created_at.strftime("%b %d")
       %ul.proto-tag-list.list-inline
-        %li
-          / %a{ :href => "#", :class => "btn btn-default" } iPad
-          - if prototype.tag1
-            .btn.btn-default
-              = prototype.tag1
-        %li
-          / %a{ :href => "#", :class => "btn btn-default" } wireframe
-          - if prototype.tag2
-            .btn.btn-default
-              = prototype.tag2
-        %li
-          / %a{ :href => "#", :class => "btn btn-default" } wireframe
-          - if prototype.tag3
-            .btn.btn-default
-              = prototype.tag3
+        - prototype.tag_list.each do |tag|
+          %li
+            = link_to tag, tag_path(tag), class: "btn btn-default"

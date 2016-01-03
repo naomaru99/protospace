@@ -43,10 +43,12 @@ class PrototypesController < ApplicationController
   end
 
   def create_params
-    params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image, :property]).merge(user_id: current_user.id)
+    tag_list = params[:tag_list].join(",")
+    params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image, :property]).merge(user_id: current_user.id, tag_list: tag_list)
   end
 
   def update_params
-    params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image, :property, :id]).merge(user_id: current_user.id)
+    tag_list = params[:tag_list].join(",")
+    params.require(:prototype).permit(:title, :concept, :catchcopy, :tag1, :tag2, :tag3, thumbnails_attributes: [:image, :property, :id]).merge(user_id: current_user.id, tag_list: tag_list)
   end
 end

@@ -54,4 +54,5 @@ gem 'pry-rails'
 gem 'paperclip'
 gem 'carrierwave'
 gem 'kaminari'
+gem 'acts-as-taggable-on'
 

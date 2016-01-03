@@ -6,4 +6,7 @@ class Prototype < ActiveRecord::Base
 
   accepts_nested_attributes_for :thumbnails
   paginates_per 8
+
+  acts_as_taggable
+  acts_as_taggable_on :tags
 end
