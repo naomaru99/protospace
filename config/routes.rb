@@ -5,16 +5,17 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'top#index'
+  root 'prototypes/newest#index'
 
   resources :user, only: [:index, :show, :new, :edit, :update]
   resources :login, only: :index
   resources :top, only: :index
-  resources :prototypes, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :prototypes do
     resources :comments, only: [:create], module: 'prototypes'
     resources :likes, only: [:create, :destroy]
   end
+  resources :newest, only: :index, module: 'prototypes'
+  resources :popular, only: :index, module: 'prototypes'
 
 
   # Example of regular route:
