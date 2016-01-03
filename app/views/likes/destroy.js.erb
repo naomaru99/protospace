@@ -1,1 +1,2 @@
-$('#like-button').html('<%= j (link_to image_tag("icon_heart.svg"), prototype_likes_path(@prototype), method: :post, remote: true) %> Like <span class="num" id="like-sum"><%= @likes.count %></span>');
+$('#like').html('<%= j render "likes/like" %>');
+$('#like-sum').html('<%= @likes.count %>');

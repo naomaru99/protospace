@@ -11,19 +11,8 @@
             = link_to "by #{@prototype.user.username}", user_path(@prototype.user.id)
             %span.degree= "#{@prototype.user.group} #{@prototype.user.work}"
 
-    .col-md-6.text-right
-      - if @like.blank?
-        %button.btn.btn-default.increment-button#like-button
-          = link_to image_tag("icon_heart.svg"), prototype_likes_path(@prototype), method: :post, remote: true
-          Like
-          %span.num#like-sum
-            = @likes.count
-      - else
-        %button.btn.btn-default.decrement-button#like-button
-          = link_to image_tag("icon_heart_red.svg"), prototype_like_path(@prototype, current_user), method: :delete, remote: true
-          Like
-          %span.num#like-sum
-            = @likes.count
+    #like-function
+      = render "likes/like"
 
   .row
     .col-md-9
