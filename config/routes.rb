@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources :prototypes, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :prototypes do
     resources :comments, only: [:create], module: 'prototypes'
+    resources :likes, only: [:create, :destroy]
   end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
