@@ -8,16 +8,29 @@
         .cover-image-upload
           = f.fields_for :thumbnails do |t|
             = t.file_field :image
+            %img#main_preview{src: ""}
             = t.hidden_field :property, value: "main"
       .col-md-12
         %ul.proto-sub-list.list-group
-          - 2.times do
-            %li.list-group-item.col-md-4
-              .image-upload
-                = f.fields_for :thumbnails do |t|
-                  = t.file_field :image
-                  = t.hidden_field :property, value: "sub"
-          %li.list-group-item.col-md-4
+          %li.list-group-item.col-md-4.appear_form
+            .image-upload#image_0_uploader
+              = f.fields_for :thumbnails do |t|
+                = t.file_field :image
+                %img#sub_0_preview{src: ""}
+                = t.hidden_field :property, value: "sub"
+          %li.list-group-item.col-md-4.appear_form
+            .image-upload#image_1_uploader
+              = f.fields_for :thumbnails do |t|
+                = t.file_field :image
+                %img#sub_1_preview{src: ""}
+                = t.hidden_field :property, value: "sub"
+          %li.list-group-item.col-md-4.hide_form
+            .image-upload#image_2_uploader
+              = f.fields_for :thumbnails do |t|
+                = t.file_field :image
+                %img#sub_2_preview{src: ""}
+                = t.hidden_field :property, value: "sub"
+          %li.list-group-item.col-md-4#add_new_form
             .image-upload-plus
               %span +
     .row.proto-description
@@ -36,3 +49,38 @@
             = text_field_tag 'tag_list[]', nil, placeholder: "Application"
     .row.text-center.proto-btn
       = f.submit "Publish", class: "btn btn-lg btn-primary btn-block"
+
+
+:javascript
+
+  $(function(){
+    var $mainimg = $(".cover-image-upload input[type = file]");
+    var $subimg0 = $("#image_0_uploader input[type = file]");
+    var $subimg1 = $("#image_1_uploader input[type = file]");
+    var $subimg2 = $("#image_2_uploader input[type = file]");
+    var $addNewForm = $("#add_new_form")
+    var $hideForm = $(".hide_form")
+
+    $hideForm.hide();
+
+    $mainimg.change(function(){
+      proto_main_image(this)
+    });
+
+    $subimg0.change(function(){
+      proto_sub_image(this, 0)
+    });
+
+    $subimg1.change(function(){
+      proto_sub_image(this, 1)
+    });
+
+    $subimg2.change(function(){
+      proto_sub_image(this, 2)
+    });
+
+    $addNewForm.on("click", function(){
+      add_new_form_in_new($addNewForm, $hideForm)
+    });
+
+  });
